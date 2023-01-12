@@ -1,14 +1,28 @@
+global.__basedir = __dirname
+
 const express = require('express')
-const app = express()
+const cookieParser = require('cookie-parser')
+const sessions = require('express-session')
+const {checkLogin, debugRoute} = require('./scripts/middlewares') 
+
 port = 3000
+const app = express()
 
-const log = console.log
+app.use(express.static('public'))
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(cookieParser())
+app.use(sessions({
+    secret: "tempsecret",
+    saveUninitialized: true,
+    cookie: {maxAge: 60*60*24*1000},
+    resave: false
+}))
+app.use(checkLogin)
+app.use(debugRoute)
+app.use(require('./scripts/routes'))
 
-
-app.get('/', (req, res) => {
-    return res.send("Hello, World!")
-})
-
+ 
 app.listen(port, () => {
-return log(`Server started at http://localhost:${port}`)
+    return console.log(`Server started at http://localhost:${port}`)
 })
