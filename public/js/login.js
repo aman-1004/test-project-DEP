@@ -21,9 +21,12 @@ form1.onsubmit = async (e) => {
             "email": email 
         })
     })
-    response = await response.text()
-    form1.hidden = true
-    form2.hidden = false 
+    let status = await response.status
+    if(status==200) {
+        form1.hidden = true
+        form2.hidden = false 
+    }
+    else alert("You are not authorized")
     console.log(response)
 }
 form2.onsubmit = async (e) => {
