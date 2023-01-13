@@ -4,6 +4,8 @@ let form1 = forms[0]
 let form2 = forms[1]
 let email = undefined
 let otp = undefined
+let container = document.querySelector('.container')
+
 form1.onsubmit = async (e) => {
     e.preventDefault()
     const input = form1.querySelector('input')
@@ -12,6 +14,8 @@ form1.onsubmit = async (e) => {
         return false;
     }
     email = input.value.trim().toLowerCase()
+    container.style.cursor = 'wait'
+    input.style.cursor = container.style.cursor
     let response = await fetch('/login/genOTP', {
         method: "POST",
         headers: {
@@ -22,6 +26,9 @@ form1.onsubmit = async (e) => {
         })
     })
     let status = await response.status
+    container.style.cursor = ''
+    input.style.cursor = container.style.cursor
+
     if(status==200) {
         form1.hidden = true
         form2.hidden = false 
@@ -37,6 +44,9 @@ form2.onsubmit = async (e) => {
         return false;
     }
     otp = input.value.trim().toLowerCase()
+    container.style.cursor = 'wait'
+    input.style.cursor = container.style.cursor
+
     let response = await fetch('/login/verifyOTP', {
         method: "POST",
         headers: {
@@ -47,8 +57,11 @@ form2.onsubmit = async (e) => {
             "otp": otp
         })
     })
-    
+
     let status = await response.status
+    container.style.cursor = ''
+    input.style.cursor = container.style.cursor
+
     if(status == 200) {
         window.location.replace('/')
     }
