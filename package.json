@@ -19,6 +19,7 @@
   "homepage": "https://github.com/aman-1004/test-project-DEP#readme",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
     "express-session": "^1.17.3",
     "express.js": "^1.0.0"
   }
