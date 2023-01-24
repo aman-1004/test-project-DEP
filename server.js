@@ -20,7 +20,7 @@ app.use(sessions({
     cookie: {maxAge: 60*60*24*1000},
     resave: false
 }))
-app.use(checkLogin)
+// app.use(checkLogin)
 app.use(debugRoute)
 app.use(require('./scripts/routes'))
 
