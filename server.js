@@ -4,6 +4,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const sessions = require('express-session')
 const {checkLogin, debugRoute} = require('./scripts/middlewares') 
+require('dotenv').config()
 
 port = 3000
 const app = express()
@@ -14,7 +15,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(sessions({
-    secret: "tempsecret",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     cookie: {maxAge: 60*60*24*1000},
     resave: false

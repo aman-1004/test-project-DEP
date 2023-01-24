@@ -2,3 +2,5 @@ node_modules/
 postdata.txt
 **/.env
 scripts/mailer/**
+README.html
+IGNORE/*
