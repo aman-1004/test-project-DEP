@@ -1,0 +1,5 @@
+0 -> Instructor Approval Pending
+1 -> Advisor Approval Pending
+2 -> Enrolled
+
+5 -> Rejected

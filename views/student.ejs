@@ -7,11 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="header" style="text-align:center"> 
+        <a href="/logout"> Logout </a><br>
+    </div>
+    <br>
+    <% if(enrolled.length != 0) { %> 
     Enrolled Courses:
     <ul>
-        <% results.forEach((result) => { %>
-        <li><%= result %></li>
-    <%  }); %>
+        <% for(var course of enrolled){ %>
+        <li><%= course.coursetitle %> offered by <%= course.instructorname %> </li>
+    <%  } %>
     </ul>
+    <% } %>
+    <% if(pending.length != 0) { %>
+    Pending Courses:
+    <ul>
+        <% for(var course of pending){ %>
+        <li><b><%= course.coursetitle %></b> offered by  <b> <%= course.instructorname %> - <i> </b> <%= {0: "Pending Instructor Approval", 1: "Pending Advisor Approval", 5: "Rejected"}[course.status] %></i> </li>
+    <%  } %>
+    </ul>
+    <% } %>
+    <a href="/offerings"> Add More Courses </a><br> 
 </body>
 </html>

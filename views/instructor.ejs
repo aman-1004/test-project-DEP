@@ -7,11 +7,63 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="header" style="text-align:center"> 
+    <a href="/logout"> Logout </a><br>
+    </div>
+    <br>
+    <% if(approvals.length != 0) { %>
     Following Students require your Approval 
     <ul>
     <% for (var approval of approvals) { %>
-    <li> <%= approval.courseName %> </li>
+    <li data-value="<%= approval.id %>"> 
+        <div class="studentName"> <%= approval.student_name%></div>
+        <div class="studentEntrynumber"> <%= approval.student_entry_number%> </div>
+        <div class="courseName"> <%= approval.course_name%> </div> 
+    <button id="approve"> Approve </button>
+    <button id="reject"> Reject </button>
+    </li>
     <% } %>
     </ul>
+    <% } else { %>
+        No pending approvals 
+    <% } %>
+    
+
+
+    <script>
+        function setStatus(approval_id, status){
+            let response = fetch('/setEnrolment', {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    approval_id, status
+                })
+            })
+            if (status === 1) {
+                alert("approved")
+            }
+            else  {
+                alert("rejected")
+            }
+        }
+        document.querySelectorAll("button#approve").forEach(function (element) { 
+            element.addEventListener("click", function(e) {
+            console.log("button is pressedd")
+            const approval_id = this.parentNode.getAttribute('data-value');
+            setStatus(approval_id, 1)
+            this.parentNode.remove()
+        })})
+
+
+        document.querySelectorAll("button#reject").forEach(function (element) { 
+            element.addEventListener("click", function(e) {
+            console.log("button is pressedd")
+            const approval_id = this.parentNode.getAttribute('data-value');
+            setStatus(approval_id, 0)
+            this.parentNode.remove()
+        })})
+    </script>
 </body>
 </html>

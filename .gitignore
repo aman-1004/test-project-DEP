@@ -4,3 +4,4 @@ postdata.txt
 scripts/mailer/**
 README.html
 IGNORE/*
+postgres/*

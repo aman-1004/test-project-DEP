@@ -9,8 +9,10 @@
 <body>
     Currently Courses being offered:
     <ul>
-        <% for(var offering of offerings) { %>
-        <li> <%= offering.title %> </li>
+        <% for(var offering of course_offerings) { %>
+        <li> 
+            <div>
+                <a href="/enroll/<%= offering.id %>"> <%= offering.title %></a> offered by <%= offering.instructor_name %></div></li>
         <% } %>
     </ul> 
 </body>
